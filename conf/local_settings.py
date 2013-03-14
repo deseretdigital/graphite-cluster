@@ -68,4 +68,4 @@ REMOTE_RENDER_CONNECT_TIMEOUT = 1.0
 # and a common scheme is to use 7102 for instance b, 7202 for instance c, etc.
 #
 # You *should* use 127.0.0.1 here in most cases
-CARBONLINK_HOSTS = ['127.0.0.1:7002:c', '127.0.0.1:7102:c']
+CARBONLINK_HOSTS = ['127.0.0.1:7002:c', '127.0.0.1:7102:d']
