@@ -45,7 +45,7 @@ DATABASES = {
 # remote server in the cluster. These servers must each have local access to
 # metric data. Note that the first server to return a match for a query will be
 # used.
-CLUSTER_SERVERS = ['64.147.131.231:7001', '64.147.131.235:7001']
+CLUSTER_SERVERS = ['64.147.130.44:7001', '64.147.131.235:7001']
 
 ## These are timeout values (in seconds) for requests to remote webapps
 REMOTE_STORE_FETCH_TIMEOUT = 6   # Timeout to fetch series data
