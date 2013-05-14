@@ -45,7 +45,7 @@ DATABASES = {
 # remote server in the cluster. These servers must each have local access to
 # metric data. Note that the first server to return a match for a query will be
 # used.
-CLUSTER_SERVERS = ['64.147.131.231:7001', '64.147.131.235:7001']
+CLUSTER_SERVERS = ['64.147.130.44:7001', '64.147.131.231:7001']
 
 ## These are timeout values (in seconds) for requests to remote webapps
 REMOTE_STORE_FETCH_TIMEOUT = 6   # Timeout to fetch series data
@@ -68,4 +68,4 @@ REMOTE_RENDER_CONNECT_TIMEOUT = 1.0
 # and a common scheme is to use 7102 for instance b, 7202 for instance c, etc.
 #
 # You *should* use 127.0.0.1 here in most cases
-CARBONLINK_HOSTS = ['127.0.0.1:7002:a', '127.0.0.1:7102:b']
+CARBONLINK_HOSTS = ['127.0.0.1:7002:e', '127.0.0.1:7102:f']
