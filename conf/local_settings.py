@@ -18,7 +18,7 @@
 # unneeded cache misses. Set to [] to disable caching of images and fetched data
 #MEMCACHE_HOSTS = ['10.10.10.10:11211', '10.10.10.11:11211', '10.10.10.12:11211']
 #DEFAULT_CACHE_DURATION = 60 # Cache images and data for 1 minute
-MEMCACHE_HOSTS = ['64.147.130.44:11211', '64.147.131.231:11211', '64.147.131.235:11211']
+MEMCACHE_HOSTS = ['64.147.130.44:11211', '64.147.131.237:11211', '64.147.131.235:11211']
 
 ##########################
 # Database Configuration #
