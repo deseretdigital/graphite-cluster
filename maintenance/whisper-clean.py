@@ -77,6 +77,7 @@ for dirname, dirnames, filenames in os.walk(DATA_DIR):
         basename, ext = os.path.splitext(filename)
         if '.wsp' != ext:
             print('skipping %s' % relpath(pathname, DATA_DIR))
+            continue
         
         metric_dest = router.getDestinations(relpath(join(dirname, basename), DATA_DIR).replace('/', '.'))
         

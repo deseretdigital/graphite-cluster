@@ -23,16 +23,19 @@ from carbon import util
 
 ## Read in options
 metric_key = ''
+metric_type = ''
+
+# TODO add in metric type
 
 try:
-    opts, args = getopt(sys.argv[1:],"hn:k:",["node=", "key="])
+    opts, args = getopt(sys.argv[1:],"hk:",["key="])
 except getopt.GetoptError:
     print('Usage: python graphite-router.py -k <metric key>')
     sys.exit(2)
 
 for opt, arg in opts:
     if opt == '-h': 
-        print('Usage: python graphite-router.py -n <address> -k <metric key>')
+        print('Usage: python graphite-router.py -k <metric key>')
         sys.exit()
     elif opt in ("-k", "--key"):
         metric_key = arg
@@ -57,12 +60,9 @@ router = ConsistentHashingRouter(settings.REPLICATION_FACTOR)
  
 for destination in destinations: 
     router.addDestination(destination);    
-
-# Check for statsite prefix
-if not metric_key.startswith('statsite.'):
-    metric_key = 'statsite.' + metric_key
- 
+    
 # Echo routes
+print('routes for ' + metric_key) 
 routes = router.getDestinations(metric_key)
 for route in routes:
     print(route)
