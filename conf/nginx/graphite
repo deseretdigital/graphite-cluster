@@ -1,0 +1,22 @@
+server {
+        listen 7001;
+
+        server_name graphite1.ksl.com;
+
+        access_log /var/log/nginx/graphite.access.log;
+        error_log /var/log/nginx/graphite.error.log;
+
+        location / {
+                include uwsgi_params;
+                uwsgi_pass  127.0.0.1:3031;
+        }
+        location /nginx_status {
+            stub_status on;
+            access_log   off;
+            allow 127.0.0.1;
+            allow 64.147.139.0/24;
+            allow 199.104.95.0/24;
+            allow 64.147.130.0/23;
+            deny all;
+        }
+}
