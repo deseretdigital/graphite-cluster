@@ -2,11 +2,9 @@
 
 import os
 import sys
-import getopt
+import socket
+from getopt import getopt
 from os.path import dirname, join, abspath, splitext, relpath
-
-
-from pprint import pprint
 
 # Figure out where we're installed
 BIN_DIR = dirname(abspath(__file__))
@@ -23,11 +21,11 @@ from carbon.conf import settings
 from carbon import util
 
 ## Read in options
-local_node = ''
+target_node = ''
 local_destinations = []
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:],"hn:",["node="])
+    opts, args = getopt(sys.argv[1:],"hn:",["node="])
 except getopt.GetoptError:
     print('Usage: python whisper-clean.py -n <address>')
     sys.exit(2)
@@ -37,12 +35,18 @@ for opt, arg in opts:
         print('Usage: python whisper-clean.py -n <address>')
         sys.exit()
     elif opt in ("-n", "--node"):
-        local_node = arg
+        target_node = arg
 
-if not local_node: 
-    print('Usage: python whisper-clean.py -n <address>')
-    sys.exit(2)
-
+if not target_node: 
+    host_name = socket.gethostname()
+    target_node = socket.gethostbyname(host_name)
+    
+    print('On ' + host_name + ' assuming target node is ' + target_node)
+    response = raw_input('Proceed? [Y/n]: ')
+    
+    if response.lower() != 'y':
+        sys.exit()
+    
 
 ## Settings
 # Absolute path to the Graphite Data Directory
@@ -58,7 +62,7 @@ destinations = util.parseDestinations(settings.DESTINATIONS)
 router = ConsistentHashingRouter(settings.REPLICATION_FACTOR)
  
 for destination in destinations:
-    if destination[0] == local_node:
+    if destination[0] == target_node:
         local_destinations.append(destination) 
     
     router.addDestination(destination);    
@@ -73,6 +77,7 @@ for dirname, dirnames, filenames in os.walk(DATA_DIR):
         basename, ext = os.path.splitext(filename)
         if '.wsp' != ext:
             print('skipping %s' % relpath(pathname, DATA_DIR))
+            continue
         
         metric_dest = router.getDestinations(relpath(join(dirname, basename), DATA_DIR).replace('/', '.'))
         
