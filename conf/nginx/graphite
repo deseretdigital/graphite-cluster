@@ -1,7 +1,7 @@
 server {
         listen 7001;
 
-        server_name graphite2.ksl.com;
+        server_name graphite1.ksl.com;
 
         access_log /var/log/nginx/graphite.access.log;
         error_log /var/log/nginx/graphite.error.log;
