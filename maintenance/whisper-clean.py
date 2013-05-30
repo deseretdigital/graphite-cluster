@@ -70,8 +70,8 @@ for destination in destinations:
  
 # Walk Data dir and process orphaned whisper files 
 for dirname, dirnames, filenames in os.walk(DATA_DIR):
-    if dirname.startswith(join(DATA_DIR, settings.CARBON_METRIC_PREFIX)):
-        continue
+    #if dirname.startswith(join(DATA_DIR, settings.CARBON_METRIC_PREFIX)):
+    #    continue
     for filename in filenames:
         pathname = os.path.join(dirname, filename)
         basename, ext = os.path.splitext(filename)
