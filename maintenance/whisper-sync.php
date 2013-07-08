@@ -82,7 +82,7 @@
         // Find the local IP address
         $localhost = gethostbyname(trim(`hostname`));
         // If this server is supposed to have this value
-        if (!empty($servers[$localhost])) {
+        if (in_array($localhost, $servers)) {
             echo "This stat belongs on this server and ";
             // If this server has less than the highest server
             if ($totals[$localhost] < $highest) {
