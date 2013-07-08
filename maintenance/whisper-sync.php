@@ -130,7 +130,7 @@
 
     function syncFromServer($from, $file) {
         // Strip the initial part of the path
-        $whisperPath = str_replace('/opt/graphite/storage/whisper/', '/whisper', $file);
+        $whisperPath = str_replace('/opt/graphite/storage/whisper/', 'whisper/', $file);
         $cmd = "rsync -avz $file rsync://{$from}/$whisperPath 2> /dev/null";
         // Execute the rsync command
         exec($cmd, $output, $result);
