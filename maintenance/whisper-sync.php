@@ -14,7 +14,7 @@
 
     // Set the filename and grab its key
     $file = $argv[1];
-    echo "$file ";
+    echo "$file  ";
     $key = getKeyFromFile($file);
     $servers = getServersForKey($key);
     $result = syncHighestServer($servers, $file, $key);
