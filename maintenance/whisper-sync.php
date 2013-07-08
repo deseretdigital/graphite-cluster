@@ -83,12 +83,17 @@
         $localhost = gethostbyname(trim(`hostname`));
         // If this server is supposed to have this value
         if (!empty($servers[$localhost])) {
+            echo "This stat belongs on this server and ";
             // If this server has less than the highest server
             if ($totals[$localhost] < $highest) {
+                echo "it's out of sync. Grabbing from the largest server.\n";
                 // Sync the highest server here
                 $result = syncFromServer($highestServer, $file);
+            } else {
+                echo "it's in sync.\n";
             }
         } else {
+            echo "This stat shouldn't be on this server.\n";
             // TODO: Clean up a key that doesn't belong
             // The key isn't supposed to be on this server
             $result = true;
