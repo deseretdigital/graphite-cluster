@@ -19,6 +19,7 @@
     $servers = getServersForKey($key);
     $result = syncHighestServer($servers, $file, $key);
     if ($result !== true) {
+        echo "ERROR:\n";
         echo "Rsync error!\n";
     }
 
@@ -129,7 +130,7 @@
 
     function syncFromServer($from, $file) {
         // Strip the initial part of the path
-        $whisperPath = str_replace('/opt/graphite/storage/whisper/', '', $file);
+        $whisperPath = str_replace('/opt/graphite/storage/whisper/', '/whisper', $file);
         $cmd = "rsync -avz $file rsync://{$from}/$whisperPath 2> /dev/null";
         // Execute the rsync command
         exec($cmd, $output, $result);
@@ -144,7 +145,7 @@
     }
 
     function showSyntax() {
-        echo 'walker.php <whisper_file>' . "\n";
+        echo 'whisper-sync.php <whisper_file>' . "\n";
     }
 
 ?>
