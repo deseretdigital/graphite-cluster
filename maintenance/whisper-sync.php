@@ -14,6 +14,7 @@
 
     // Set the filename and grab its key
     $file = $argv[1];
+    echo "$file\n";
     $key = getKeyFromFile($file);
     $servers = getServersForKey($key);
     $result = syncHighestServer($servers, $file, $key);
@@ -83,7 +84,7 @@
         $localhost = gethostbyname(trim(`hostname`));
         // If this server is supposed to have this value
         if (in_array($localhost, $servers)) {
-            echo "This stat belongs on this server and ";
+            echo "  This stat belongs on this server and ";
             // If this server has less than the highest server
             if ($totals[$localhost] < $highest) {
                 echo "it's out of sync. Grabbing from the largest server.\n";
@@ -93,7 +94,7 @@
                 echo "it's in sync.\n";
             }
         } else {
-            echo "This stat shouldn't be on this server.\n";
+            echo "  This stat shouldn't be on this server.\n";
             // TODO: Clean up a key that doesn't belong
             // The key isn't supposed to be on this server
             $result = true;
