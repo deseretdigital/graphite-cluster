@@ -12,9 +12,12 @@
         exit;
     }
 
+    // Get the console width
+    $consoleWidth = exec('tput cols');
+
     // Set the filename and grab its key
     $file = $argv[1];
-    echo "$file ";
+    echo str_pad($file, $consoleWidth-8);
     $key = getKeyFromFile($file);
     $servers = getServersForKey($key);
     $result = syncHighestServer($servers, $file, $key);
@@ -91,7 +94,7 @@
                 // Sync the highest server here
                 $result = syncFromServer($highestServer, $file);
             } else {
-                echo "[ok]\n";
+                echo "    [ok]\n";
             }
         } else {
             echo "[orphan]\n";
